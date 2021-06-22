@@ -261,17 +261,8 @@ changeOption(e){
                                         
                                       <select onChange={this.changeOption}  style={{width:'500px'}} required>University
                                       <option selected>SELECT UNIVERSITY</option>
-                                      {this.state.universities.map(univer=>
-                                        
-                                        <option value={univer.name}>{univer.name}</option>
-                                        
-                                        
-                                        )}
-                                      
-                                      
-                                      
-                                      
-                                      
+                                      {this.state.universities.map(univer=> <option value={univer.name}>{univer.name}</option>  )}
+
                                       </select>
                                   
 

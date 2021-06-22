@@ -13,7 +13,7 @@ class ViewAdmissionComponent extends Component {
             university:{},
             course:{},
             branch:{},
-            ApplicationId:{}
+            ApplicationId:''
 
         }
     }
@@ -27,6 +27,7 @@ class ViewAdmissionComponent extends Component {
                 course:res.data.course,
                 branch:res.data.branch,
                 ApplicationId:res.data.ApplicationId});
+                
         })
     }
 
@@ -47,7 +48,7 @@ class ViewAdmissionComponent extends Component {
                         </div>
                         <div className = "row">
                             <label> ApplicationId </label>
-                            {/* <div> { this.state.ApplicationId.applicationId }</div> */}
+                         <div> { this.state.ApplicationId }</div> 
                         </div>
                         <div className = "row">
                             <label> College </label>

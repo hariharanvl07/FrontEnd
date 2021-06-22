@@ -24,6 +24,10 @@ class CollegeService {
     getCollegeByName(clgName){
         return axios.get(EMPLOYEE_API_BASE_URL + 'getCollegeByName/'+clgName);
     }
+    getCollegeByUniversityName(UName){
+        return axios.get(EMPLOYEE_API_BASE_URL + 'getCollegeByUniversityName/'+UName);
+    }
+    
  
 }
 

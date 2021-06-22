@@ -20,8 +20,12 @@ class ListAdmissionComponent extends Component {
 
     componentDidMount(){
         AdmissionService.getAllAdmission().then((res) => {
-            this.setState({ admissions: res.data});
+       
+            console.log(res.data)
+            this.setState({admissions:res.data})
+
         });
+    console.log(this.state.admissions.admissionId)
     }
 
     addAdmission(){
@@ -55,9 +59,9 @@ class ListAdmissionComponent extends Component {
                                         admission => 
                                         <tr key = {admission.admissionId}>
 
-                                             <td> {this.state.emailId} </td>   
-                                             <td> {admission.applicationId} </td>   
-                                             <td> {admission.admissionStatus}</td>
+                                             <td> {admission.emailId} </td>   
+                                             <td><a href="#!">{admission.applicationId.applicationId}</a>  </td>   
+                                             <td>{admission.admissionStatus}</td>
                                              
                                              <td>
                                                  <button onClick={ () => this.viewAdmission(admission.admissionId)} className="btn btn-info">View </button>

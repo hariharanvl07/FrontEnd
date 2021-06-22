@@ -12,7 +12,7 @@ class ViewAllPayment extends Component {
 
     };
 
-   
+    this.updatePaymentStatus = this.updatePaymentStatus.bind(this);
     this.deletePayment = this.deletePayment.bind(this);
     this.ViewPayment = this.ViewPayment.bind(this);
     this.cancel = this.cancel.bind(this);
@@ -24,7 +24,9 @@ class ViewAllPayment extends Component {
     });
   }
 
- 
+  updatePaymentStatus(id) {
+    this.props.history.push(`/homepage/update/${id}`);
+  }
 
   ViewPayment(id) {
     this.props.history.push(`/payment/details/${id}`);
@@ -78,14 +80,24 @@ class ViewAllPayment extends Component {
 
 
                   <td className="centering">
-                  
+                    <button
+                      onClick={() =>
+                        this.updatePaymentStatus(payment.paymentId)
+                      }
+                      className="btn btn-info"
+                    >
+                      Update
+                    </button>
                     <button
                       style={{ marginLeft: "10px" }}
-                      onClick={() => this.ViewPayment(payment.paymentId)}
-                      className="btn btn-warning"
+                      onClick={() =>
+                        this.deletePayment(payment.paymentId)
+                      }
+                      className="btn btn-danger"
                     >
-                      PAY NOW
+                      Delete
                     </button>
+                    
                   </td>
 
                 </tr>

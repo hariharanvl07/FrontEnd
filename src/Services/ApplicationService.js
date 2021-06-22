@@ -22,7 +22,9 @@ class ApplicationService {
     deleteApplication(applicationId){
         return axios.delete(EMPLOYEE_API_BASE_URL + 'deleteApplication/'+applicationId);
     }
-
+    addpaymentModule(applicationId,application){
+        return axios.put(EMPLOYEE_API_BASE_URL + 'addpaymentModule/'+applicationId , application);
+    }
 }
 
 

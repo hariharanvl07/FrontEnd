@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import AdmissionService from "../../Services/AdmissionService";
 import ApplicationService from "../../Services/ApplicationService";
+import PaymentService from "../../Services/PaymentService";
+//import UniversityService from "../../Services/UniversityService";
 
 
 class UpdateApplication extends Component {
@@ -20,23 +23,21 @@ class UpdateApplication extends Component {
      dateOfInterview: "",
      applicantInterviewFeedback: "",
 
+     applicationList:[],
+     university:'',
+      college:"",
+    program:'',
+      branch:'',
+      course:'',
      year:"2021",
 
-     collegeList: [],
-     universities: [],
-     program: [],
-     course:[],
+     
 
      application: {},
+     appli:{}
     };
 
-    this.changeApplicationNameHandler = this.changeApplicationNameHandler.bind(this);
-    this.changeApplicantFullName = this.changeApplicantFullName.bind(this);
-    this.changeDateOfBirth = this.changeDateOfBirth.bind(this);
-    this.changeHighestQualification = this.changeHighestQualification.bind(this);
-    this.changeFinalYearPercentage = this.changeFinalYearPercentage.bind(this);
-    this.changegoals = this.changegoals.bind(this);
-    this.changeEmailId = this.changeEmailId.bind(this);
+   
     this.changeApplicationStatus = this.changeApplicationStatus.bind(this);
     this.changeDateOfInterview = this.changeDateOfInterview.bind(this);
     this.changeApplicantInterviewFeedback = this.changeApplicantInterviewFeedback.bind(this);
@@ -45,8 +46,10 @@ class UpdateApplication extends Component {
   }
 
   componentDidMount() {
-    ApplicationService.getApplicationById(this.state.applicationId).then((res)=>
+    ApplicationService.getApplicationById(this.state.applicationId).then((res)=>{
+     
     this.setState({
+      appli:res.data,
       applicantFullName:res.data.applicantFullName,
      dateOfBirth:res.data.dateOfBirth,
      highestQualification: res.data.highestQualification,
@@ -56,36 +59,24 @@ class UpdateApplication extends Component {
      applicationStatus: res.data.applicationStatus,
      dateOfInterview: res.data.dateOfInterview,
      applicantInterviewFeedback: res.data.applicantInterviewFeedback,
-    }))   
+     branch:res.data.branch,
+      college:res.data.college,
+    university:res.data.university,
+    course:res.data.course,
+    program:res.data.program
+
+    
+     
+    })
+    console.log(res.data)
+  
+  })   
+
   }
 
-  changeApplicationNameHandler(e) {
-    this.setState({ applicantFullName: e.target.value });
-    console.log(this.state.applicantFullName);
-  }
+ 
 
-  changeApplicantFullName(e) {
-    this.setState({ applicantFullName: e.target.value });
-  }
-
-  changeDateOfBirth(e) {
-    this.setState({ dateOfBirth: e.target.value });
-  }
-
-  changeHighestQualification(e) {
-    this.setState({ highestQualification: e.target.value });
-  }
-
-  changeFinalYearPercentage(e) {
-    this.setState({ finalYearPercentage: e.target.value });
-  }
-  changegoals(e) {
-    this.setState({ goals: e.target.value });
-  }
-
-  changeEmailId(e) {
-    this.setState({ emailId: e.target.value });
-  }
+  
 
   changeApplicationStatus(e) {
     this.setState({ applicationStatus: e.target.value });
@@ -100,7 +91,7 @@ class UpdateApplication extends Component {
   }
 
   cancel() {
-    this.props.history.push(`/homepage/view`);
+    this.props.history.push(`/homepage/adminView`);
   }
 
   save(e) {
@@ -110,16 +101,43 @@ class UpdateApplication extends Component {
       dateOfBirth:this.state.dateOfBirth,highestQualification:this.state.highestQualification,
       finalYearPercentage:this.state.finalYearPercentage,goals:this.state.goals,
       emailId:this.state.emailId,applicationStatus:this.state.applicationStatus,
-      dateOfInterview:this.state.dateOfInterview,applicantInterviewFeedback:this.state.applicantInterviewFeedback
+      dateOfInterview:this.state.dateOfInterview,applicantInterviewFeedback:this.state.applicantInterviewFeedback,
+    
+      branch:this.state.branch,
+      college:this.state.college,
+    university:this.state.university,
+    course:this.state.course,
+    program:this.state.program,
+   payment:{applicationId:this.state.appli,paymentAmount:200000,paymentDate:'26/06/2021',paymentStatus:'NOT PAID'}
+    
+    
     }
-    // console.log(this.state.applicationId,app)
-    ApplicationService.updateApplication(this.state.applicationId,app).then((res)=>console.log(res.data));
-   
+
+    
+ 
+
+    if(this.state.applicationStatus==="Selected")
+    {
+      console.log("selected")
+      ApplicationService.updateApplication(this.state.applicationId,app).then((res)=>{
+        console.log(res.data.applicationStatus)
+
+        let admission ={emailId:this.state.emailId,applicationId:app,college:this.state.college,course:this.state.course,program:this.state.program,branch:this.state.branch,university:this.state.university,admissionStatus:"NOT ADMITTED",year:'2021'}
+        console.log(admission)
+        AdmissionService.addAdmission(admission)
+        this.props.history.push(`/homepage/adminView`);
+      });   
+
+    }
+else{
+  console.log("rejected")
+  ApplicationService.updateApplication(this.state.applicationId,app)
+}
 
 
 
-    alert("Infomation Updated!");
-    this.props.history.push(`/homepage/view`);
+   // alert("Infomation Updated!");
+    //this.props.history.push(`/homepage/adminView`);
   }
 
 
@@ -208,6 +226,62 @@ class UpdateApplication extends Component {
                           required
                         />
                   </div>
+                  <div className="form-group">
+                        <input
+                          placeholder="unversity"
+                          name="unversity"
+                          className="form-control"
+                         value={this.state.university.name}
+                          autocomplete="off"
+                         
+                          required
+                        />
+                  </div>
+                  <div className="form-group">
+                        <input
+                          placeholder="college"
+                          name="college"
+                          className="form-control"
+                         value={this.state.college.collegeName}
+                          autocomplete="off"
+                         
+                          required
+                        />
+                  </div>
+                  <div className="form-group">
+                        <input
+                          placeholder="program"
+                          name="program"
+                          className="form-control"
+                         value={this.state.program.programName}
+                          autocomplete="off"
+                         
+                          required
+                        />
+                  </div>
+                  <div className="form-group">
+                        <input
+                          placeholder="course"
+                          name="course"
+                          className="form-control"
+                         value={this.state.course.courseName}
+                          autocomplete="off"
+                         
+                          required
+                        />
+                  </div>
+                  <div className="form-group">
+                        <input
+                          placeholder="branch"
+                          name="branch"
+                          className="form-control"
+                         value={this.state.branch.branchName}
+                          autocomplete="off"
+                         
+                          required
+                        />
+                  </div>
+               
                   
                   <div className="form-group">
                         <input

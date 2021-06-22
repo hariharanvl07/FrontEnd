@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import ApplicationService from "../../Services/ApplicationService";
+//import AdmissionService from "../../Services/AdmissionService";
+import BranchService from "../../Services/BranchService";
+import CollegeService from "../../Services/CollegeService";
+import CourseService from "../../Services/CourseService";
+import ProgramService from "../../Services/ProgramService";
+import UniversityService from "../../Services/UniversityService";
+//import ApplicationService from "../../Services/ApplicationService";
+import UserService from "../../Services/UserService";
 
 class AddApplicationComponent extends Component {
   constructor(props) {
@@ -7,23 +14,33 @@ class AddApplicationComponent extends Component {
 
     this.state = {
       user: {},
-
+      applicationStatus:"Waitlisted",
+      id:this.props.match.params.id,
       applicantFullName: " ",
       dateOfBirth: " ",
       highestQualification: "",
       finalYearPercentage: "",
       goals: "",
       emailId: "",
-      applicationStatus: "",
+    
       dateOfInterview: "",
       applicantInterviewFeedback: "",
 
       collegeList: [],
       universities: [],
-      program: [],
-      course: [],
-
+      programList: [],
+      courseList: [],
+    branchList: [],
+      
       application: {},
+
+      applicationList:[],
+     university:{},
+      college:{},
+    program:{},
+      branch:{},
+      course:{},
+      year:'2021'
     };
 
     this.changeApplicationNameHandler =
@@ -40,13 +57,34 @@ class AddApplicationComponent extends Component {
     this.changeApplicantInterviewFeedback =
       this.changeApplicantInterviewFeedback.bind(this);
     this.submit = this.submit.bind(this);
+    this.changeOption=this.changeOption.bind(this)
+    this.changeOption2=this.changeOption2.bind(this)
+    this.changeOption3=this.changeOption3.bind(this)
+    this.changeOption4=this.changeOption4.bind(this)
+    this.changeOption5=this.changeOption5.bind(this)
   }
 
+
   componentDidMount() {
+    UserService.getUserById(this.state.id).then((res)=>{
+      console.log(res.data.application)
+      
+this.setState({user:res.data,applicationList:res.data.application})
+console.log(this.state.user)
+console.log(this.state.applicationList)
+UniversityService.getUniversities().then((res)=>{this.setState({universities:res.data})})
+
+    })
   }
 
   submit(e) {
     e.preventDefault();
+
+   
+
+
+
+
     let app = {
       applicantFullName: this.state.applicantFullName,
       dateOfBirth: this.state.dateOfBirth,
@@ -55,9 +93,29 @@ class AddApplicationComponent extends Component {
       goals: this.state.goals,
       emailId: this.state.emailId,
       applicationStatus: this.state.applicationStatus,
-      // dateOfInterview:this.state.dateOfInterview,applicantInterviewFeedback:this.state.applicantInterviewFeedback
+      dateOfInterview:this.state.dateOfInterview,
+      applicantInterviewFeedback:this.state.applicantInterviewFeedback,
+      branch:this.state.branch,
+      college:this.state.college,
+    university:this.state.university,
+    course:this.state.course,
+    program:this.state.program
+
+      
     };
-    ApplicationService.addApplication(app).then((res) => console.log(res.data));
+
+    let user ={username:this.state.user.username,password:this.state.user.password,application:this.state.applicationList}
+
+this.setState({applicationList:this.state.applicationList.push(app)})
+console.log(this.state.applicationList)
+
+UserService.addUserApplication(this.state.id,user).then((res)=>{
+
+  console.log(res.data)
+  this.props.history.push(`/homepage`);
+})
+
+
   }
 
   changeApplicationNameHandler(e) {
@@ -99,13 +157,56 @@ class AddApplicationComponent extends Component {
   changeApplicantInterviewFeedback(e) {
     this.setState({ applicantInterviewFeedback: e.target.value });
   }
-
-  changeOption(e) {
+  changeOption(e){
     e.preventDefault();
-  }
+  UniversityService.getUniversityByName(e.target.value).then((res)=>{
+    
+  this.setState({university:res.data,collegeList:res.data.collegeList})
+
+
+    })
+}
+changeOption2(e){
+  e.preventDefault();
+  CollegeService.getCollegeByName(e.target.value).then((res)=>{
+   
+  this.setState({college:res.data,programList:res.data.programList})
+  
+console.log(this.state.college)
+    })
+}
+changeOption3(e){
+  e.preventDefault();
+  ProgramService.getProgram(e.target.value).then((res)=>{
+   
+  this.setState({program:res.data,courseList:res.data.courseList})
+
+    })
+}
+changeOption4(e){
+  e.preventDefault();
+  CourseService.getCourseById(e.target.value).then((res)=>{
+   
+  this.setState({course:res.data,branchList:res.data.branches})
+
+    })
+}
+
+changeOption5(e){
+ 
+  e.preventDefault();
+  BranchService.getBranchById(e.target.value).then((res)=>{
+   this.setState({branch:res.data})
+  
+ 
+    })
+}
+
+
   render() {
     return (
       <div>
+       
         <div className="container">
           <br></br>
           <div className="container" class="addApplication">
@@ -195,32 +296,47 @@ class AddApplicationComponent extends Component {
                       <br></br>
                       <label> University: </label>
 
-                      <select style={{ width: "500px" }}>
-                        Select University
-                        <option selected>Open this select menu</option>
-                      </select>
+                      <select onChange={this.changeOption}  style={{width:'500px'}} required>University
+                                      <option selected>SELECT UNIVERSITY</option>
+                                      {this.state.universities.map(univer=> <option value={univer.name}>{univer.name}</option>  )}
+
+                                      </select>
                       <br></br>
 
                       <label> College: </label>
-                      <select style={{ width: "500px" }}>
-                        Select College
-                        <option selected>Open this select menu</option>
-                      </select>
+                      <select onChange={this.changeOption2}  style={{width:'500px'}} required>College
+                                      <option selected>SELECT COLLEGE</option>
+                                      {this.state.collegeList.map(clg=> <option value={clg.collegeName}>{clg.collegeName}</option>  )}
+
+                                      </select>
                       <br></br>
 
                       <label> Program: </label>
-                      <select style={{ width: "500px" }}>
-                        Select Program
-                        <option selected>Open this select menu</option>
-                      </select>
+                     <select onChange={this.changeOption3}  style={{width:'500px'}} required>Program
+                                      <option selected>SELECT PROGRAM</option>
+                                      {this.state.programList.map(prog=> <option value={prog.programId}>{prog.programName}</option>  )}
+
+                                      </select>
                       <br></br>
 
                       <label> Course: </label>
-                      <select style={{ width: "500px" }}>
-                        Select Course
-                        <option selected>Open this select menu</option>
-                      </select><br></br><br></br><br></br>
+                      <select onChange={this.changeOption4}  style={{width:'500px'}} required>Course
+                                      <option selected>SELECT COURSE</option>
+                                      {this.state.courseList.map(course=> <option value={course.courseId}>{course.courseName}</option>  )}
 
+                                      </select><br></br>
+                                      
+                                      <label> Branch: </label>
+                      <select onChange={this.changeOption5}  style={{width:'500px'}} required>Branch
+                                      <option selected>SELECT BRANCH</option>
+                                      {this.state.branchList.map(branch=> <option value={branch.branchId}>{branch.branchName}</option>  )}
+
+                                      </select>
+                                      
+                                      
+                                      
+                                      <br></br><br></br>
+  
                       <button type="submit" className="btn btn-success" style={{ marginLeft: "170px" } } >
                         Save
                       </button>

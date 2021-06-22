@@ -5,8 +5,8 @@ const EMPLOYEE_API_BASE_URL = "http://localhost:9090/admission/";
 class AdmissionService {
 
     
-    addAdmission(college){
-        return axios.post(EMPLOYEE_API_BASE_URL+"addAdmission/",college);
+    addAdmission(user){
+        return axios.post(EMPLOYEE_API_BASE_URL+"addAdmission",user);
     }
     updateAdmission(admissionId, admission){
         return axios.put(EMPLOYEE_API_BASE_URL + 'updateAdmission/'+admissionId , admission);

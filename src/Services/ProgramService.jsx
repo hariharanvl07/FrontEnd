@@ -16,7 +16,16 @@ class ProgramService {
 
         return axios.delete(EMPLOYEE_API_BASE_URL+"deleteProgram/"+id)
     }
+    getProgramByCollegeName(clgName){
+        return axios.get(EMPLOYEE_API_BASE_URL+"getProgramByCollegeName/"+clgName);
+    }
 
+    getProgramByName(progName){
+        return axios.get(EMPLOYEE_API_BASE_URL+"getProgramByName/"+progName);
+    }
+  
+  
+    getProgramByName
 }
 
 export default new ProgramService()

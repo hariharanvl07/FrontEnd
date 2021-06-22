@@ -25,14 +25,23 @@ class GetDetailsById extends Component {
         PaymentService.getPaymentById(this.state.id).then((res) => {
             this.setState({ payment: res.data })
             console.log(this.state.payment.paymentId)
+            
         })
     }
     cancel() {
-        this.props.history.push(`/homepage/allpayments`);
+let payment={paymentAmount:this.state.payment.paymentAmount,paymentDate:this.state.payment.paymentDate,paymentStatus:'PAID'}
+
+        PaymentService.updatePaymentDetail(this.state.id,payment).then((res)=>{
+            console.log(res.data)
+            
+            this.props.history.push(`/payment/allpayments`);
+
+        })
+
     }
     render() {
         return (
-            <div className="container">
+            <div className="container" >
                 <br></br>
                 <div className="container" class="UpdatePayment">
                     <div className="row" class="createCall">
@@ -52,7 +61,7 @@ class GetDetailsById extends Component {
                                     <br></br>
 
                                     <button onClick={this.cancel} className="btn btn-primary" style={{ marginLeft: "10px" }}>
-                                        Cancel{" "}
+                                    PAY
                                     </button>
                                 </div>
 

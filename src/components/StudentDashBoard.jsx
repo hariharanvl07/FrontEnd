@@ -19,6 +19,7 @@ class StudentDashBoard extends Component {
            
         }
         this.logout=this.logout.bind(this)
+        this.apply=this.apply.bind(this)
     }
 
 componentDidMount(){
@@ -26,6 +27,7 @@ componentDidMount(){
 
 this.setState({user:res.data,userId:res.data.id})
     })
+console.log(this.state.userId)
 }
 
     
@@ -36,7 +38,13 @@ logout(){
    
    this.props.history.push('/Student-login')
 }
-    render() {
+apply(){
+    this.props.history.push(`/homepage/${this.state.userId}/add`)
+}
+
+
+
+render() {
         if(this.state.loggedIn===false){
             return <Redirect to='/login'></Redirect>
         }
@@ -46,15 +54,15 @@ logout(){
             <div>
               <h1>StudentDashBoard</h1> 
               <h2>Hi {this.state.name}</h2> 
-              <h4>{this.state.user.phoneNumber}</h4> 
+              <h4>{this.state.userId}</h4> 
             <nav>
                 <nav-item>
                 
-                <a href="#!">Apply Online</a> <br />
+                <a href='#!' onClick={this.apply}>Apply Online</a> <br />
                 <a href='/updateStudent/' >update</a><br />
-                           <a href="#!">Application status</a> <br />
+                           <a href="/homepage/view">Application status</a> <br />
 
-                           <a href="#!">Payments</a><br />
+                           <a href="/payment/allpayments">Payments</a><br />
 
                             <a href="#!">Course</a>  <br />
                     

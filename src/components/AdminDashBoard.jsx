@@ -61,8 +61,9 @@ logout(){
      
       <Route  path = "/admin/:name/ListColleges" exact component = {ListCollegesComponent}></Route>
                           
-         <Route  path = "/admin/:name/viewCollege/:id" exact component = {ViewCollegeComponent}></Route>
-     
+         
+      <Route  path = "/admin/:name/viewCollege/:id" exact component = {ViewCollegeComponent}></Route>
+         /homepage/adminView
      </ Switch>
                                     
                            
@@ -76,6 +77,10 @@ logout(){
                             <a href={`/admin/${this.props.match.params.name}/addCollege`}>add College</a><br />
                             <a href={`/admin/${this.props.match.params.name}/ListColleges`}>View Colleges</a>  <br />
                             <a href={`/admin/${this.props.match.params.name}/addProgram`}>add Program</a><br />
+                            <a href={`/homepage/adminView`}>Application Status</a><br />
+                            <a href={`/admission/allAdminssion`}>Admission Status</a><br />
+                            
+                            <a href={`/ho`}>Payment</a><br />
                             <Button
               color="warning"
               variant="contained"
