@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import CollegeService from '../Services/CollegeService';
-import ProgramService from '../Services/ProgramService';
+import CollegeService from '../../Services/CollegeService';
+import ProgramService from '../../Services/ProgramService';
 
 class UpdateProgramComponent extends Component {
 

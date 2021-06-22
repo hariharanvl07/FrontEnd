@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import CollegeService from '../Services/CollegeService';
-import CollegeService from '../Services/CollegeService';
+import CollegeService from '../../Services/CollegeService';
 
 
 //import UniversityService from '../Services/UniversityService';

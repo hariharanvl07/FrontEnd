@@ -2,27 +2,18 @@ import axios from 'axios';
 
 const EMPLOYEE_API_BASE_URL = "http://localhost:9090/user/";
 
-class CollegeService {
+class UserService {
 
-    getCollege(){
-        return axios.get(EMPLOYEE_API_BASE_URL+"getAllColleges");
-    }
-    addCollege(college){
-        return axios.post(EMPLOYEE_API_BASE_URL+"addCollege/",college);
-    }
-    updateCollege(clgId, clg){
-        return axios.put(EMPLOYEE_API_BASE_URL + 'updateCollege/'+clgId , clg);
+    addUser(user){
+        return axios.post(EMPLOYEE_API_BASE_URL+"addUser",user);
     }
 
-    getCollegeById(clgId){
-        return axios.get(EMPLOYEE_API_BASE_URL + 'getCollegeById/'+clgId);
-    }
+   getUser(username){
 
-    deleteCollegeById(clgId){
-        return axios.delete(EMPLOYEE_API_BASE_URL + 'deleteCollegeById/'+clgId);
-    }
+    return axios.get(EMPLOYEE_API_BASE_URL+"getUser/"+username);
+   }
 
 }
 
 
-export default new CollegeService()
+export default new UserService()
