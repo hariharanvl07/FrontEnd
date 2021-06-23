@@ -5,6 +5,11 @@ import Homepage from './components/Homepage';
 import AdminDashBoard from './components/AdminDashBoard';
 import StudentDashBoard from './components/StudentDashBoard';
 
+
+import AddUniversityComponent from './components/UniversityComponent/AddUniversityComponent';
+import UpdateUniversityComponent from './components/UniversityComponent/UpdateUniversityComponent';
+import ViewUniversityComponent from './components/UniversityComponent/ViewUniversityComponent';
+
 import Login from './components/Login';
 import StudentLogin from './components/StudentLogin';
 import AddCollegeComponent from './components/CollegeComponent/AddCollegeComponent';
@@ -89,7 +94,12 @@ function App() {
 
                            
 
-
+<Route  path = "/AddUniversity" exact component = {AddUniversityComponent}></Route>
+                          
+                          <Route  path = "/UpdateUniversity/:universityId" exact component = {UpdateUniversityComponent}></Route>
+                          
+                       
+                          <Route  path = "/ViewUniversity/:id" exact component = {ViewUniversityComponent}></Route>
                           
                           </Switch>   
   
