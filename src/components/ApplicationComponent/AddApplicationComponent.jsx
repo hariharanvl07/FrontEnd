@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ApplicationService from "../../Services/ApplicationService";
 //import AdmissionService from "../../Services/AdmissionService";
 import BranchService from "../../Services/BranchService";
 import CollegeService from "../../Services/CollegeService";
@@ -67,13 +68,13 @@ class AddApplicationComponent extends Component {
 
   componentDidMount() {
     UserService.getUserById(this.state.id).then((res)=>{
-      console.log(res.data.application)
+    
       
 this.setState({user:res.data,applicationList:res.data.application})
-console.log(this.state.user)
 console.log(this.state.applicationList)
-UniversityService.getUniversities().then((res)=>{this.setState({universities:res.data})})
 
+UniversityService.getUniversities().then((res)=>{this.setState({universities:res.data})})
+console.log(this.state.universities)
     })
   }
 
@@ -95,24 +96,33 @@ UniversityService.getUniversities().then((res)=>{this.setState({universities:res
       applicationStatus: this.state.applicationStatus,
       dateOfInterview:this.state.dateOfInterview,
       applicantInterviewFeedback:this.state.applicantInterviewFeedback,
-      branch:this.state.branch,
-      college:this.state.college,
-    university:this.state.university,
-    course:this.state.course,
-    program:this.state.program
+      branch:this.state.branch.branchName,
+      college:this.state.college.collegeName,
+    university:this.state.university.name,
+    course:this.state.course.courseName,
+    program:this.state.program.programName
 
       
     };
 
-    let user ={username:this.state.user.username,password:this.state.user.password,application:this.state.applicationList}
+ApplicationService.addApplication(app).then((res)=>{
 
-this.setState({applicationList:this.state.applicationList.push(app)})
-console.log(this.state.applicationList)
+  this.setState({applicationList:this.state.applicationList.push(res.data)})
 
-UserService.addUserApplication(this.state.id,user).then((res)=>{
+
+})
+
+
+
+
+
+
+let user ={username:this.state.user.username,password:this.state.user.password,application:this.state.applicationList}
+console.log(user)
+UserService.updateUser(this.state.id,user).then((res)=>{
 
   console.log(res.data)
-  this.props.history.push(`/homepage`);
+  
 })
 
 

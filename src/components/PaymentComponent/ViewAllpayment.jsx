@@ -33,8 +33,9 @@ class ViewAllPayment extends Component {
 
   componentDidMount() {
     PaymentService.viewAllPaymentDetails().then((res) => {
-      this.setState({ payments: res.data });
       console.log(res.data)
+      this.setState({ payments: res.data });
+    
     });
   }
 

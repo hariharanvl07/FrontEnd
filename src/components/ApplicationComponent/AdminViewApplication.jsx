@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import ApplicationService from "../../Services/ApplicationService";
 
-class AdminViewApplication extends Component {
+class ViewApplication extends Component {
     constructor(props) {
       super(props);
   
       this.state = {
         application: [],
-        id:this.props.match.params.id
+        id:this.props.match.params.id,
+        visible:"visible"
     
       };
   
@@ -35,8 +36,12 @@ class AdminViewApplication extends Component {
     componentDidMount() {
         ApplicationService.viewAllApplication().then((res) => {
         this.setState({ application: res.data });
-      });
-    console.log(this.state.application)
+    console.log(res.data)
+      }
+      
+  
+      );
+     
     }
   
     cancel() {
@@ -52,7 +57,7 @@ class AdminViewApplication extends Component {
           <br></br>
           <div class="Cancelbutton">
             <button onClick={this.cancel} className="btn btn-primary">
-              Back
+              Back{" "}
             </button>
           </div>
           <div className="row" class="table">
@@ -74,23 +79,8 @@ class AdminViewApplication extends Component {
   
                   
                           <td>
-                          <button
-                              onClick={() =>
-                                this.updateApplication(app.applicationId)
-                              }
-                              className="btn btn-secondary"
-                            >
-                              Update
-                            </button>
-                            <button
-                              style={{ marginLeft: "10px" }}
-                              onClick={() =>
-                                this.deleteApplication(app.applicationId)
-                              }
-                              className="btn btn-danger"
-                            >
-                              Delete
-                            </button>
+                         
+
                             <button
                               style={{ marginLeft: "10px" }}
                               onClick={()=> this.ViewApplication(app.applicationId)}
@@ -98,6 +88,15 @@ class AdminViewApplication extends Component {
                             >
                               View
                             </button>
+
+                            <button
+                              style={{ marginLeft: "10px" }}
+                              onClick={()=> this.updateApplication(app.applicationId)}
+                              className="btn btn-info"
+                            >
+                              Update
+                            </button>
+                       
                           </td>
                           <td class="uni"> {app.applicationStatus} </td>
                         </tr>
@@ -110,4 +109,4 @@ class AdminViewApplication extends Component {
     }
   }
   
-  export default AdminViewApplication;
+  export default ViewApplication;

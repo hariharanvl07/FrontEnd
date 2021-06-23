@@ -80,7 +80,7 @@ logout(){
                             <a href={`/homepage/adminView`}>Application Status</a><br />
                             <a href={`/admission/allAdminssion`}>Admission Status</a><br />
                             
-                            <a href={`/ho`}>Payment</a><br />
+                            <a href={`/payment/allpayments`}>Payment</a><br />
                             <Button
               color="warning"
               variant="contained"

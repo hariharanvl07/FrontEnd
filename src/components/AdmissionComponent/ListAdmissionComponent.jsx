@@ -60,7 +60,7 @@ class ListAdmissionComponent extends Component {
                                         <tr key = {admission.admissionId}>
 
                                              <td> {admission.emailId} </td>   
-                                             <td><a href="#!">{admission.applicationId.applicationId}</a>  </td>   
+                                             <td>{admission.applicationId} </td>   
                                              <td>{admission.admissionStatus}</td>
                                              
                                              <td>

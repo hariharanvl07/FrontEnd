@@ -37,6 +37,7 @@ class ViewApplication extends Component {
         ApplicationService.viewAllApplication().then((res) => {
         this.setState({ application: res.data });
       });
+      console.log(this.state.application)
     }
   
     cancel() {

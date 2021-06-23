@@ -26,10 +26,11 @@ class ViewAdmissionComponent extends Component {
                 university:res.data.university,
                 course:res.data.course,
                 branch:res.data.branch,
-                ApplicationId:res.data.ApplicationId});
+                ApplicationId:res.data});
                 
         })
     }
+    
 
     render() {
         return (
@@ -52,23 +53,23 @@ class ViewAdmissionComponent extends Component {
                         </div>
                         <div className = "row">
                             <label> College </label>
-                            <div> { this.state.college.collegeName }</div>
+                            <div> { this.state.college}</div>
                         </div>
                         <div className = "row">
                             <label> Program </label>
-                            <div> { this.state.program.programName }</div>
+                            <div> { this.state.program }</div>
                         </div>
                         <div className = "row">
                             <label> Course </label>
-                            <div> { this.state.course.courseName }</div>
+                            <div> { this.state.course}</div>
                         </div>
                         <div className = "row">
                             <label> Branch </label>
-                            <div> { this.state.branch.branchName }</div>
+                            <div> { this.state.branch}</div>
                         </div>
                         <div className = "row">
                             <label> University </label>
-                            <div> { this.state.university.name }</div>
+                            <div> { this.state.university}</div>
                         </div>
                         <div className = "row">
                             <label> year </label>

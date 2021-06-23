@@ -26,8 +26,9 @@ componentDidMount(){
     UserService.getUser(this.state.name).then((res)=>{
 
 this.setState({user:res.data,userId:res.data.id})
-    })
-console.log(this.state.userId)
+console.log(this.state.name)   
+})
+
 }
 
     
