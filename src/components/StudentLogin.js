@@ -20,6 +20,12 @@ class Login extends Component {
         {
             StudentloggedIn=false
         }       
+        const Atoken=localStorage.getItem("admintoken")
+        let AloggedIn=true
+        if(Atoken==null)
+        {
+            AloggedIn=false
+        }       
         
         this.state = {
          
@@ -27,7 +33,8 @@ class Login extends Component {
             password: '',
             error:'',
             StudentloggedIn,
-            user:{}
+            user:{},
+            AloggedIn
            
         }
         this.continue=this.continue.bind(this)
@@ -62,9 +69,10 @@ if(this.state.userName===this.state.user.username&&this.state.password===this.st
 }
     
     render() {
-      if(this.state.AdminloggedIn){
-        return <Redirect to='/admin/admin'></Redirect>
-    }
+    
+    if(this.state.AloggedIn){
+      return <Redirect to='/admin/admin'></Redirect>
+  }
     
    
         return (
@@ -100,7 +108,7 @@ if(this.state.userName===this.state.user.username&&this.state.password===this.st
               onClick={this.continue}
             >Continue</Button>
 
-            <h4 style={{marginTop:'20px'}}>New User? <a href="/SignUp">Create Account</a></h4>
+            <h4 style={{marginTop:'20px'}}>New User? <a href="/SignUp" style={{color:'blue'}}>Create Account</a></h4>
             
  </MuiThemeProvider>
  

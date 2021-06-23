@@ -8,7 +8,8 @@ class ViewAllPayment extends Component {
 
     this.state = {
       payments: [],
-      id: this.props.match.params.id
+      id: this.props.match.params.id,
+      name: this.props.match.params.name
 
     };
 
@@ -40,7 +41,7 @@ class ViewAllPayment extends Component {
   }
 
   cancel() {
-    this.props.history.push(`/homepage`);
+    this.props.history.push(`/Student/${this.state.name}`);
   }
 
   render() {

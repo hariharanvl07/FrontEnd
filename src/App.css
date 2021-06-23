@@ -101,3 +101,35 @@ label{
 .form{
   display: block;
 }
+
+.nav{
+size: 20%;
+
+}
+
+
+h4{
+  size: 10%;
+}
+
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #4bc4d6;
+  overflow-x: hidden;
+  padding-top: 20px;
+
+  border: #282c34;
+  
+}
+
+
+a{
+color: azure;
+
+
+}

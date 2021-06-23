@@ -53,29 +53,59 @@ render() {
 
         return (
             <div>
+
               <h1>StudentDashBoard</h1> 
-              <h2>Hi {this.state.name}</h2> 
-              <h4>{this.state.userId}</h4> 
-            <nav>
-                <nav-item>
-                
-                <a href='#!' onClick={this.apply}>Apply Online</a> <br />
-                <a href='/updateStudent/' >update</a><br />
-                           <a href="/homepage/view">Application status</a> <br />
+             <ul class="nav nav-tabs" style={{marginTop:'50px',backgroundColor:'ThreeDHighlight'}}>
+  <li class="nav-item">
+    <a class="nav-link active"href='#!' onClick={this.apply} style={{color:'blueviolet'}}>Apply Now</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href={`/homepage/${this.state.name}/view`} style={{color:'blueviolet'}}>Application Status</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"href={`/updateStudent/${this.state.name}`}style={{color:'blueviolet'}}>Update profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href={`/${this.state.name}/payment/allpayments`} style={{color:'blueviolet'}}> payment details</a>
+  </li>
+</ul>         
 
-                           <a href="/payment/allpayments">Payments</a><br />
+              
+              
+          
 
-                            <a href="#!">Course</a>  <br />
-                    
-                    
-                </nav-item>
-                </nav>  
+              <div class="jumbotron">
+  <h1 class="display-4">Hi {this.state.name}</h1>
+  <h4>PhoneNo: {this.state.user.phoneNumber}</h4>
+  <p class="lead">Here you can apply for a course,check your admisson and browse colleges</p>
+  <hr class="my-4" />
+  <Button
+color="warning"
+variant="contained"
+onClick={this.logout}
+>Log Out</Button>
 
-                <Button
-              color="warning"
-              variant="contained"
-              onClick={this.logout}
-            >Log Out</Button>
+               </div> 
+  
+
+
+
+
+
+
+
+
+
+
+               
+              
+               
+               
+               
+               
+               
+               
+              
             </div>
         );
     }

@@ -7,7 +7,7 @@
             super(props);
         
             this.state = {
-        
+        name:this.props.match.params.name,
              applicationId:this.props.match.params.id,
              application: {}
             };
@@ -18,7 +18,7 @@
             ApplicationService.getApplicationById(this.state.applicationId).then((res)=>{this.setState({application:res.data})})
         }
         cancel() {
-            this.props.history.push(`/homepage/view`);
+            this.props.history.push(`/homepage/${this.state.name}/view`);
           }
       
         render() {

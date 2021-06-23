@@ -44,6 +44,8 @@ class UpdatePayment extends Component {
 
         let pay = { paymentAmount: this.state.paymentAmount, paymentDate: this.state.paymentDate, paymentStatus: this.state.paymentStatus }
         PaymentService.updatePaymentDetail(this.state.id,pay).then((res) => console.log(res.data))
+       
+       
         alert("Infomation Updated!");
         this.props.history.push(`/admin/${this.state.name}`);
    

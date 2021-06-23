@@ -6,6 +6,7 @@ class ViewApplication extends Component {
       super(props);
   
       this.state = {
+        name:this.props.match.params.name,
         application: [],
         id:this.props.match.params.id,
         visible:"visible"
@@ -29,7 +30,7 @@ class ViewApplication extends Component {
     }
 
     ViewApplication(id) {
-        this.props.history.push(`/getapplication/${id}`);
+        this.props.history.push(`/${this.state.name}/getapplication/${id}`);
     }
     
   
@@ -41,7 +42,7 @@ class ViewApplication extends Component {
     }
   
     cancel() {
-      this.props.history.push(`/homepage`);
+      this.props.history.push(`/Student/${this.state.name}`);
     }
   
     render() {

@@ -64,10 +64,10 @@ function App() {
       <Route  path = "/listBranch" exact component = {ListBranchComponent}></Route>
                           <Route  path = "/" exact component = {Homepage}></Route>
                           <Route  path = "/admin/:name" exact component = {AdminDashBoard}></Route>
-                          <Route  path = "/admin/:name/addCollege" exact component = {AddCollegeComponent}></Route>
+                         <Route  path = "/admin/:name/addCollege" exact component = {AddCollegeComponent}></Route>
                           <Route  path = "/admin/:name/viewCollege/:id/addProgram" exact component = {AddProgramComponent}></Route>
                           <Route  path = "/student/:name" exact component = {StudentDashBoard}></Route>
-                           <Route  path = "/:name/updateCollege/:id" exact component = {updateCollegeComponent}></Route>
+    <Route  path = "/:name/updateCollege/:id" exact component = {updateCollegeComponent}></Route>
                            <Route  path = "/:name/:cname/updateprogram/:id" exact component = {UpdateProgramComponent}></Route>
                           <Route  path = "/login" exact component = {Login}></Route>
                           <Route  path = "/Student-login" exact component = {StudentLogin}></Route>
@@ -75,9 +75,9 @@ function App() {
                           <Route  path = "/payment/status" exact component = {Getpaymentdetails}></Route>    
                           <Route  path = "/homepage/:id/add" exact component = {AddApplicationComponent}></Route>
                     <Route  path = "/homepage/update/:id" exact component = {UpdateApplication}></Route>
-                    <Route  path = "/homepage/view" exact component = {ViewApplication}></Route>
+                    <Route  path = "/homepage/:name/view" exact component = {ViewApplication}></Route>
                     <Route  path = "/homepage/adminView" exact component = {AdminViewApplication}></Route>
-                    <Route  path = "/getapplication/:id" exact component = {GetApplicationById}></Route>     
+                    <Route  path = "/:name/getapplication/:id" exact component = {GetApplicationById}></Route>     
 <Route  path = "/payment" exact component = {AddPayment}></Route>
 
 <Route  path = "/payment/details/:id" exact component = {GetDetailsById}></Route>
@@ -86,15 +86,17 @@ function App() {
 
 <Route  path = "/payment/update/:id" exact component = {UpdatePayment}></Route>
 
-<Route  path = "/payment/allpayments" exact component = {ViewAllPayment}></Route>
+<Route  path = "/:name/payment/allpayments" exact component = {ViewAllPayment}></Route>
+
 <Route  path = "/admission/allAdminssion" exact component = {ListAdmissionComponent}></Route>
 
 <Route  path = "/payment/application" exact component = {PaymentByApplicationId}></Route>
+<Route  path = "/updateStudent/:name" exact component = {StudentUpdate}></Route>
 <Route  path = "/admin/:name/viewCollege/:id" exact component = {ViewCollegeComponent}></Route>
 
                            
 
-<Route  path = "/AddUniversity" exact component = {AddUniversityComponent}></Route>
+<Route  path = "/admin/:name/AddUniversity" exact component = {AddUniversityComponent}></Route>
                           
                           <Route  path = "/UpdateUniversity/:universityId" exact component = {UpdateUniversityComponent}></Route>
                           

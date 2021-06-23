@@ -121,7 +121,7 @@ UserService.addUser(user).then(()=>{
               onClick={this.continue}
             >Continue</Button>
 
-            <h4 style={{marginTop:'20px'}}>Already have a account? <a href="/Student-login">Login</a></h4>
+            <h4 style={{marginTop:'20px'}}>Already have a account? <a href="/Student-login"  style={{color:'blue'}}>Login</a></h4>
             
  </MuiThemeProvider>
  

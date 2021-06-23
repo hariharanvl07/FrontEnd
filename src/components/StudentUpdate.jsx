@@ -17,14 +17,15 @@ class StudentUpdate extends Component {
           
         
         this.state = {
-         
-            userName: '',
+        
+            userName: this.props.match.params.name,
             password: '',
             email:'',
             phoneNo:'',
             firstName:'',
             lastName:'',
             middleName:'',
+            id:''
             
            
         }
@@ -33,6 +34,23 @@ class StudentUpdate extends Component {
         this.ChangePassword=this.ChangePassword.bind(this)
         this.ChangePhoneNo=this.ChangePhoneNo.bind(this)
         this.ChangeUserName=this.ChangeUserName.bind(this)
+    }
+
+    componentDidMount(){
+
+      UserService.getUser(this.state.userName).then((res)=>{
+        this.setState({
+          userName:res.data.username,
+          password:res.data.password,
+          phoneNo:res.data.phoneNumber,
+          email:res.data.emailId,
+          id:res.data.id
+
+        })
+
+      })
+
+
     }
 
 
@@ -57,10 +75,10 @@ continue=(e)=>{
 e.preventDefault()
 let user={username:this.state.userName,password:this.state.password,phoneNumber:this.state.phoneNo,emailId:this.state.email}
 
-UserService.addUser(user).then(()=>{
+UserService.updateUser(this.state.id,user).then(()=>{
 
 
- this.props.history.push(`/Student-login`)
+ this.props.history.push(`/Student/${this.state.userName}`)
 })
 
 
@@ -85,6 +103,7 @@ UserService.addUser(user).then(()=>{
               placeholder="FirstName"
               label="FirstName"
             onChange={this.ChangeFirstName}
+            
               margin="normal"
              
             />
@@ -110,7 +129,8 @@ UserService.addUser(user).then(()=>{
               placeholder="username"
               label="Username"
             onChange={this.ChangeUserName}
-              margin="normal"
+            value={this.state.userName}  
+            margin="normal"
              
             />
             <br />
@@ -118,7 +138,7 @@ UserService.addUser(user).then(()=>{
               placeholder="password"
               label="Password"
               onChange={this.ChangePassword}
-            
+              value={this.state.password}
               margin="normal"
              
             />
@@ -127,7 +147,7 @@ UserService.addUser(user).then(()=>{
               placeholder="email"
               label="email"
               onChange={this.ChangeEmail}
-            
+              value={this.state.email}
               margin="normal"
              
             />
@@ -136,7 +156,7 @@ UserService.addUser(user).then(()=>{
               placeholder="phoneNo"
               label="phoneNo"
               onChange={this.ChangePhoneNo}
-            
+              value={this.state.phoneNo}
               margin="normal"
              
             />
